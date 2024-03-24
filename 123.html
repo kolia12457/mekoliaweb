@@ -1,3 +1,71 @@
-<a href="https://www.youtube.com/channel/UCQ-BWHkezCsCIae2KaQg9Zg">
-    <button>sub to my chanell</button>
-</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Projects</title>
+<style>
+  body {
+    background-color: #121212; /* Dark background */
+    color: #ffffff; /* White text */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+  }
+
+  h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 1.2em;
+  }
+
+  .coming-soon {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #808080; /* Lighter text for coming soon */
+    font-size: 1em;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .show {
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>My Projects</h1>
+  <p>Your project descriptions go here.</p>
+  <div class="coming-soon" id="comingSoon">Coming soon...</div>
+</div>
+
+<script>
+  // Show "Coming soon..." when scrolling down
+  window.addEventListener('scroll', function() {
+    var element = document.getElementById('comingSoon');
+    var distanceY = window.pageYOffset || document.documentElement.scrollTop;
+    var showAt = 500; // Adjust as necessary
+    if (distanceY > showAt) {
+      element.classList.add('show');
+    } else {
+      element.classList.remove('show');
+    }
+  });
+</script>
+</body>
+</html>
