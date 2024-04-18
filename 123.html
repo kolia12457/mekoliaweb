@@ -1,71 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Projects</title>
-<style>
-  body {
-    background-color: #121212; /* Dark background */
-    color: #ffffff; /* White text */
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Chat App</title>
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.0.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.1/firebase-database.js"></script>
+  <script>
+    const firebaseConfig = {
+    apiKey: "AIzaSyAGcNzH8srHyq-mp6NpHq3EjddoqSwA9nc",
+    authDomain: "chatcaca-e1984.firebaseapp.com",
+    projectId: "chatcaca-e1984",
+    storageBucket: "chatcaca-e1984.appspot.com",
+    messagingSenderId: "576205735573",
+    appId: "1:576205735573:web:2dc5e7e489fe6dc3c27d9c"
+    };
 
-  .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    flex-direction: column;
-  }
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
 
-  h1 {
-    font-size: 2.5em;
-    margin-bottom: 20px;
-  }
+    // Function to generate a unique chat code
+    function generateChatCode() {
+      return Math.random().toString(36).substr(2, 8);
+    }
 
-  p {
-    font-size: 1.2em;
-  }
+    // Function to send a message
+    function sendMessage() {
+      const message = document.getElementById('message-input').value;
+      const sender = document.getElementById('name').value;
+      const chatCode = document.getElementById('chat-code').value;
+      const chatRef = database.ref('chats/' + chatCode);
+      chatRef.push({
+        message: message,
+        sender: sender
+      });
+      // Clear input field after sending message
+      document.getElementById('message-input').value = '';
+    }
 
-  .coming-soon {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: #808080; /* Lighter text for coming soon */
-    font-size: 1em;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-  }
+    // Function to receive messages
+    function receiveMessages(chatCode) {
+      const chatRef = database.ref('chats/' + chatCode);
+      chatRef.on('child_added', snapshot => {
+        const messageData = snapshot.val();
+        displayMessage(messageData.sender, messageData.message);
+      });
+    }
 
-  .show {
-    opacity: 1;
-  }
-</style>
+    // Function to display message in the chat interface
+    function displayMessage(sender, message) {
+      const chatMessages = document.getElementById('chat-messages');
+      const messageElement = document.createElement('div');
+      messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+      chatMessages.appendChild(messageElement);
+    }
+
+    // Function to generate chat code and display it
+    function generateAndDisplayChatCode() {
+      const chatCode = generateChatCode();
+      document.getElementById('chat-code').value = chatCode;
+      const name = document.getElementById('name').value;
+      document.getElementById('chat-username').innerText = name;
+      receiveMessages(chatCode);
+    }
+
+    // Function to join chat using entered code
+    function joinChat() {
+      const chatCode = document.getElementById('entered-code').value;
+      const name = document.getElementById('name').value;
+      document.getElementById('chat-username').innerText = name;
+      receiveMessages(chatCode);
+    }
+  </script>
 </head>
 <body>
-<div class="container">
-  <h1>My Projects</h1>
-  <p>coming soon</p>
-  <div class="coming-soon" id="comingSoon">Coming soon...</div>
-</div>
-
-<script>
-  // Show "Coming soon..." when scrolling down
-  window.addEventListener('scroll', function() {
-    var element = document.getElementById('comingSoon');
-    var distanceY = window.pageYOffset || document.documentElement.scrollTop;
-    var showAt = 500; // Adjust as necessary
-    if (distanceY > showAt) {
-      element.classList.add('show');
-    } else {
-      element.classList.remove('show');
-    }
-  });
-</script>
+  <div id="name-form">
+    <h1>Welcome to the Chat App</h1>
+    <label for="name">Enter Your Name:</label>
+    <input type="text" id="name" placeholder="Your Name">
+    <button onclick="document.getElementById('name-form').style.display = 'none'; document.getElementById('code-form').style.display = 'block';">Next</button>
+  </div>
+  <div id="code-form" style="display: none;">
+    <h2>Generate Code</h2>
+    <button onclick="generateAndDisplayChatCode()">Generate Chat Code</button>
+    <input type="text" id="chat-code" placeholder="Generated Chat Code" readonly>
+    <hr>
+    <h2>Enter Code</h2>
+    <input type="text" id="entered-code" placeholder="Enter Chat Code">
+    <button onclick="joinChat()">Enter Code</button>
+  </div>
+  <div id="chat" style="display: none;">
+    <h1>Welcome <span id="chat-username"></span>!</h1>
+    <div id="chat-messages"></div>
+    <input type="text" id="message-input" placeholder="Type your message...">
+    <button onclick="sendMessage()">Send</button>
+  </div>
 </body>
 </html>
