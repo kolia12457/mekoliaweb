@@ -62,6 +62,8 @@
       document.getElementById('chat-code').value = chatCode;
       const name = document.getElementById('name').value;
       document.getElementById('chat-username').innerText = name;
+      document.getElementById('name-form').style.display = 'none';
+      document.getElementById('chat').style.display = 'block';
       receiveMessages(chatCode);
     }
 
@@ -70,6 +72,8 @@
       const chatCode = document.getElementById('entered-code').value;
       const name = document.getElementById('name').value;
       document.getElementById('chat-username').innerText = name;
+      document.getElementById('name-form').style.display = 'none';
+      document.getElementById('chat').style.display = 'block';
       receiveMessages(chatCode);
     }
   </script>
@@ -79,16 +83,7 @@
     <h1>Welcome to the Chat App</h1>
     <label for="name">Enter Your Name:</label>
     <input type="text" id="name" placeholder="Your Name">
-    <button onclick="document.getElementById('name-form').style.display = 'none'; document.getElementById('code-form').style.display = 'block';">Next</button>
-  </div>
-  <div id="code-form" style="display: none;">
-    <h2>Generate Code</h2>
-    <button onclick="generateAndDisplayChatCode()">Generate Chat Code</button>
-    <input type="text" id="chat-code" placeholder="Generated Chat Code" readonly>
-    <hr>
-    <h2>Enter Code</h2>
-    <input type="text" id="entered-code" placeholder="Enter Chat Code">
-    <button onclick="joinChat()">Enter Code</button>
+    <button onclick="generateAndDisplayChatCode()">Next</button>
   </div>
   <div id="chat" style="display: none;">
     <h1>Welcome <span id="chat-username"></span>!</h1>
