@@ -12,48 +12,24 @@
             padding: 0;
             background-color: #f2f2f2;
         }
-        .header {
-            margin: 40px 0; /* Increased margin */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .header img {
-            width: 100px; /* Increased size */
-            height: 100px; /* Increased size */
-            margin-left: 20px; /* Adjusted spacing */
-        }
-        h1 {
-            font-size: 4rem; /* Increased font size */
-            margin: 0;
-        }
-        .song {
-            margin: 40px 0; /* Increased margin */
-        }
-        p {
-            font-size: 3rem; /* Increased font size */
-            margin: 0 0 20px 0; /* Adjusted spacing */
-        }
-        .audio-container {
-            padding: 20px; /* Added padding */
-            border: 5px solid #ccc; /* Added border for better visibility */
-            border-radius: 10px; /* Rounded corners */
-            display: inline-block; /* Center container */
-            position: relative;
-        }
-        .custom-play-button {
-            width: 200px; /* Size of the button */
-            height: 200px; /* Size of the button */
+        .fullscreen-button {
+            width: 100vw; /* Full viewport width */
+            height: 100vh; /* Full viewport height */
             background-color: #007bff; /* Button color */
-            border-radius: 50%; /* Circular button */
+            color: white;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: white;
-            font-size: 100px; /* Font size of the play icon */
+            font-size: 4rem; /* Large font size */
             cursor: pointer;
+            border: none;
+            outline: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1; /* Ensure it is on top */
         }
-        .custom-play-button:hover {
+        .fullscreen-button:hover {
             background-color: #0056b3; /* Darker button color on hover */
         }
         .hidden {
@@ -63,84 +39,36 @@
 </head>
 <body>
 
-    <div class="header">
-        <h1>Music Player</h1>
-        <img src="speakericon.jpeg" alt="Speaker Icon">
-    </div>
+    <button class="fullscreen-button" id="play-button">
+        ▶ Play
+    </button>
 
-    <div class="song">
-        <p>Call Me - Plenka</p>
-        <div class="audio-container">
-            <div class="custom-play-button" onclick="togglePlay(this, 'musicfolder/callme.mp3')">
-                ▶
-            </div>
-            <audio id="audio-callme" class="hidden">
-                <source src="musicfolder/callme.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
-    </div>
-
-    <div class="song">
-        <p>Bad Things - Cults</p>
-        <div class="audio-container">
-            <div class="custom-play-button" onclick="togglePlay(this, 'musicfolder/badthings.mp3')">
-                ▶
-            </div>
-            <audio id="audio-badthings" class="hidden">
-                <source src="musicfolder/badthings.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
-    </div>
-
-    <div class="song">
-        <p>Hope - XXXTentacion</p>
-        <div class="audio-container">
-            <div class="custom-play-button" onclick="togglePlay(this, 'musicfolder/hope.mp3')">
-                ▶
-            </div>
-            <audio id="audio-hope" class="hidden">
-                <source src="musicfolder/hope.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
-    </div>
-
-    <div class="song">
-        <p>Running Up That Hill - Kate Bush</p>
-        <div class="audio-container">
-            <div class="custom-play-button" onclick="togglePlay(this, 'musicfolder/runuphill.mp3')">
-                ▶
-            </div>
-            <audio id="audio-runuphill" class="hidden">
-                <source src="musicfolder/runuphill.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
-    </div>
+    <audio id="audio-runuphill" class="hidden">
+        <source src="musicfolder/runuphill.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 
     <script>
-        function togglePlay(button, src) {
-            const audio = button.nextElementSibling;
-            if (audio.paused) {
-                audio.play();
-                button.innerHTML = '❚❚'; // Change to pause icon
-            } else {
-                audio.pause();
-                button.innerHTML = '▶'; // Change back to play icon
-            }
-        }
+        document.getElementById('play-button').addEventListener('click', function() {
+            const audio = document.getElementById('audio-runuphill');
+            audio.play().then(() => {
+                // Change button text and style when the audio starts playing
+                this.innerHTML = '❚❚ Pause';
+                this.style.backgroundColor = '#0056b3'; // Darker color when playing
+            }).catch((error) => {
+                console.error('Playback failed:', error);
+            });
+        });
 
-        // Auto-play the "Running Up That Hill" song when the page loads
-        window.onload = function() {
-            const audioRunUpHill = document.getElementById('audio-runuphill');
-            const buttonRunUpHill = document.querySelector('.song .custom-play-button[onclick*="runuphill.mp3"]');
-            if (audioRunUpHill) {
-                audioRunUpHill.play();
-                buttonRunUpHill.innerHTML = '❚❚'; // Change to pause icon
-            }
-        };
+        // Optional: Change button to "Pause" if the audio is already playing
+        document.getElementById('audio-runuphill').addEventListener('play', function() {
+            document.getElementById('play-button').innerHTML = '❚❚ Pause';
+        });
+
+        // Optional: Change button to "Play" if the audio is paused
+        document.getElementById('audio-runuphill').addEventListener('pause', function() {
+            document.getElementById('play-button').innerHTML = '▶ Play';
+        });
     </script>
 
 </body>
