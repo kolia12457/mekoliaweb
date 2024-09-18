@@ -3,73 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Music Player</title>
+    <title>Auto Play Video</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
             margin: 0;
             padding: 0;
-            background-color: #f2f2f2;
+            overflow: hidden; /* Prevents scrollbars */
+            background-color: #000; /* Black background for better video viewing */
         }
-        .fullscreen-button {
+        video {
             width: 100vw; /* Full viewport width */
             height: 100vh; /* Full viewport height */
-            background-color: #007bff; /* Button color */
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 4rem; /* Large font size */
-            cursor: pointer;
-            border: none;
-            outline: none;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1; /* Ensure it is on top */
-        }
-        .fullscreen-button:hover {
-            background-color: #0056b3; /* Darker button color on hover */
-        }
-        .hidden {
-            display: none;
+            object-fit: cover; /* Ensures the video covers the entire viewport */
         }
     </style>
 </head>
 <body>
-
-    <button class="fullscreen-button" id="play-button">
-        ▶ Play
-    </button>
-
-    <audio id="audio-runuphill" class="hidden">
-        <source src="musicfolder/runuphill.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-
-    <script>
-        document.getElementById('play-button').addEventListener('click', function() {
-            const audio = document.getElementById('audio-runuphill');
-            audio.play().then(() => {
-                // Change button text and style when the audio starts playing
-                this.innerHTML = '❚❚ Pause';
-                this.style.backgroundColor = '#0056b3'; // Darker color when playing
-            }).catch((error) => {
-                console.error('Playback failed:', error);
-            });
-        });
-
-        // Optional: Change button to "Pause" if the audio is already playing
-        document.getElementById('audio-runuphill').addEventListener('play', function() {
-            document.getElementById('play-button').innerHTML = '❚❚ Pause';
-        });
-
-        // Optional: Change button to "Play" if the audio is paused
-        document.getElementById('audio-runuphill').addEventListener('pause', function() {
-            document.getElementById('play-button').innerHTML = '▶ Play';
-        });
-    </script>
-
+    <video autoplay muted>
+        <source src="musicfolder/video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 </body>
 </html>
