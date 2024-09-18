@@ -13,30 +13,37 @@
             background-color: #f2f2f2;
         }
         .header {
-            margin: 20px 0;
+            margin: 40px 0; /* Increased margin */
             display: flex;
             justify-content: center;
             align-items: center;
         }
         .header img {
-            width: 50px; /* Increased size */
-            height: 50px; /* Increased size */
-            margin-left: 15px; /* Adjusted spacing */
+            width: 100px; /* Increased size */
+            height: 100px; /* Increased size */
+            margin-left: 20px; /* Adjusted spacing */
         }
         h1 {
-            font-size: 2rem; /* Increased font size */
+            font-size: 4rem; /* Increased font size */
             margin: 0;
         }
         .song {
-            margin: 20px 0; /* Increased margin */
+            margin: 40px 0; /* Increased margin */
         }
         p {
-            font-size: 1.5rem; /* Increased font size */
-            margin: 0 0 10px 0; /* Adjusted spacing */
+            font-size: 3rem; /* Increased font size */
+            margin: 0 0 20px 0; /* Adjusted spacing */
         }
         audio {
             width: 100%; /* Full width for better interaction */
-            max-width: 300px; /* Limit width to prevent over-scaling */
+            max-width: 500px; /* Limit width to prevent over-scaling */
+            font-size: 2rem; /* Increased font size */
+        }
+        .audio-container {
+            padding: 20px; /* Added padding */
+            border: 5px solid #ccc; /* Added border for better visibility */
+            border-radius: 10px; /* Rounded corners */
+            display: inline-block; /* Center container */
         }
     </style>
 </head>
@@ -49,34 +56,42 @@
 
     <div class="song">
         <p>Call Me - Plenka</p>
-        <audio controls>
-            <source src="musicfolder/callme.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
+        <div class="audio-container">
+            <audio controls>
+                <source src="musicfolder/callme.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
     </div>
 
     <div class="song">
         <p>Bad Things - Cults</p>
-        <audio controls>
-            <source src="musicfolder/badthings.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
+        <div class="audio-container">
+            <audio controls>
+                <source src="musicfolder/badthings.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
     </div>
 
     <div class="song">
         <p>Hope - XXXTentacion</p>
-        <audio controls>
-            <source src="musicfolder/hope.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
+        <div class="audio-container">
+            <audio controls>
+                <source src="musicfolder/hope.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
     </div>
 
     <div class="song">
         <p>Running Up That Hill - Kate Bush</p>
-        <audio controls>
-            <source src="musicfolder/runuphill.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
+        <div class="audio-container">
+            <audio controls>
+                <source src="musicfolder/runuphill.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
     </div>
 
 </body>
