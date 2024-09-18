@@ -34,16 +34,30 @@
             font-size: 3rem; /* Increased font size */
             margin: 0 0 20px 0; /* Adjusted spacing */
         }
-        audio {
-            width: 100%; /* Full width for better interaction */
-            max-width: 500px; /* Limit width to prevent over-scaling */
-            font-size: 2rem; /* Increased font size */
-        }
         .audio-container {
             padding: 20px; /* Added padding */
             border: 5px solid #ccc; /* Added border for better visibility */
             border-radius: 10px; /* Rounded corners */
             display: inline-block; /* Center container */
+            position: relative;
+        }
+        .custom-play-button {
+            width: 200px; /* Size of the button */
+            height: 200px; /* Size of the button */
+            background-color: #007bff; /* Button color */
+            border-radius: 50%; /* Circular button */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 100px; /* Font size of the play icon */
+            cursor: pointer;
+        }
+        .custom-play-button:hover {
+            background-color: #0056b3; /* Darker button color on hover */
+        }
+        .hidden {
+            display: none;
         }
     </style>
 </head>
@@ -57,7 +71,10 @@
     <div class="song">
         <p>Call Me - Plenka</p>
         <div class="audio-container">
-            <audio controls>
+            <div class="custom-play-button" onclick="togglePlay(this, 'musicfolder/callme.mp3')">
+                ▶
+            </div>
+            <audio id="audio-callme" class="hidden">
                 <source src="musicfolder/callme.mp3" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
@@ -67,7 +84,10 @@
     <div class="song">
         <p>Bad Things - Cults</p>
         <div class="audio-container">
-            <audio controls>
+            <div class="custom-play-button" onclick="togglePlay(this, 'musicfolder/badthings.mp3')">
+                ▶
+            </div>
+            <audio id="audio-badthings" class="hidden">
                 <source src="musicfolder/badthings.mp3" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
@@ -77,7 +97,10 @@
     <div class="song">
         <p>Hope - XXXTentacion</p>
         <div class="audio-container">
-            <audio controls>
+            <div class="custom-play-button" onclick="togglePlay(this, 'musicfolder/hope.mp3')">
+                ▶
+            </div>
+            <audio id="audio-hope" class="hidden">
                 <source src="musicfolder/hope.mp3" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
@@ -87,12 +110,38 @@
     <div class="song">
         <p>Running Up That Hill - Kate Bush</p>
         <div class="audio-container">
-            <audio controls>
+            <div class="custom-play-button" onclick="togglePlay(this, 'musicfolder/runuphill.mp3')">
+                ▶
+            </div>
+            <audio id="audio-runuphill" class="hidden">
                 <source src="musicfolder/runuphill.mp3" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
         </div>
     </div>
+
+    <script>
+        function togglePlay(button, src) {
+            const audio = button.nextElementSibling;
+            if (audio.paused) {
+                audio.play();
+                button.innerHTML = '❚❚'; // Change to pause icon
+            } else {
+                audio.pause();
+                button.innerHTML = '▶'; // Change back to play icon
+            }
+        }
+
+        // Auto-play the "Running Up That Hill" song when the page loads
+        window.onload = function() {
+            const audioRunUpHill = document.getElementById('audio-runuphill');
+            const buttonRunUpHill = document.querySelector('.song .custom-play-button[onclick*="runuphill.mp3"]');
+            if (audioRunUpHill) {
+                audioRunUpHill.play();
+                buttonRunUpHill.innerHTML = '❚❚'; // Change to pause icon
+            }
+        };
+    </script>
 
 </body>
 </html>
