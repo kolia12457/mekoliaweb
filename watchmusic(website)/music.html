@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Music Player</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        .header {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .header img {
+            width: 30px;
+            height: 30px;
+            margin-left: 10px;
+        }
+        h1 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+        .song {
+            margin: 15px 0;
+        }
+        audio {
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Music Player</h1>
+        <img src="speakericon.jpeg" alt="Speaker Icon">
+    </div>
+
+    <div class="song">
+        <p>Call Me - Plenka</p>
+        <audio controls>
+            <source src="musicfolder/callme.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <div class="song">
+        <p>Bad Things - Cults</p>
+        <audio controls>
+            <source src="musicfolder/badthings.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <div class="song">
+        <p>Hope - XXXTentacion</p>
+        <audio controls>
+            <source src="musicfolder/hope.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <div class="song">
+        <p>Running Up That Hill - Kate 
