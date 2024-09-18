@@ -19,19 +19,24 @@
             align-items: center;
         }
         .header img {
-            width: 30px;
-            height: 30px;
-            margin-left: 10px;
+            width: 50px; /* Increased size */
+            height: 50px; /* Increased size */
+            margin-left: 15px; /* Adjusted spacing */
         }
         h1 {
-            font-size: 1.5rem;
+            font-size: 2rem; /* Increased font size */
             margin: 0;
         }
         .song {
-            margin: 15px 0;
+            margin: 20px 0; /* Increased margin */
+        }
+        p {
+            font-size: 1.5rem; /* Increased font size */
+            margin: 0 0 10px 0; /* Adjusted spacing */
         }
         audio {
-            width: 80%;
+            width: 100%; /* Full width for better interaction */
+            max-width: 300px; /* Limit width to prevent over-scaling */
         }
     </style>
 </head>
@@ -67,4 +72,12 @@
     </div>
 
     <div class="song">
-        <p>Running Up That Hill - Kate 
+        <p>Running Up That Hill - Kate Bush</p>
+        <audio controls>
+            <source src="musicfolder/runuphill.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+</body>
+</html>
