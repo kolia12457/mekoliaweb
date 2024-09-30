@@ -1,14 +1,16 @@
-// UnhideAllItems.js
+// UnhideLiquidLight.js
 
-function unhideAllItems() {
-    const allItems = getAllItems(); // Function to get all items in the game
-    allItems.forEach(item => {
-        if (item.isHidden) {
-            item.isHidden = false; // Set the hidden property to false
+function unhideLiquidLight() {
+    const items = getItems(); // Function to get all items (adjust if necessary)
+
+    // Loop through items and unhide Liquid Light
+    items.forEach(item => {
+        if (item.name === "Liquid Light" && item.isHidden) {
+            item.isHidden = false; // Unhide the item
+            console.log("Liquid Light has been unhidden.");
         }
     });
-    console.log("All hidden items have been unhidden.");
 }
 
-// Ensure this function runs when the game starts or at an appropriate event
-document.addEventListener("DOMContentLoaded", unhideAllItems);
+// Run the function when the game loads
+document.addEventListener("DOMContentLoaded", unhideLiquidLight);
